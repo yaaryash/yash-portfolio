@@ -39,7 +39,7 @@ export const BootSequence = ({ onBootComplete }: BootSequenceProps) => {
           setShowWelcome(true);
           setTimeout(() => {
             onBootComplete();
-          }, 5000);
+          }, 1000);
           return prev;
         }
       });
