@@ -4,6 +4,7 @@ export const PROFILE = {
   username: "yaaryash",
   role: "Software Engineer",
   tagline: "Frontend Development • Backend Systems • AI/ML",
+  goal: "Interested in backend engineering and scalable software systems",
   location: "India",
   education: "B.Tech CSE, MIT ADT University, Pune",
   github: "https://github.com/yaaryash",

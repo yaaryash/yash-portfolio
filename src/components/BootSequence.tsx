@@ -57,7 +57,11 @@ export const BootSequence = ({ onBootComplete }: BootSequenceProps) => {
               (message, index) => (
                 <div key={index} className="flex items-center">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span>{message}</span>
+                  <span
+                    className={index === currentMessage ? "type-animation" : ""}
+                  >
+                    {message}
+                  </span>
                 </div>
               ),
             )}
@@ -66,17 +70,20 @@ export const BootSequence = ({ onBootComplete }: BootSequenceProps) => {
             </div>
           </div>
         ) : (
-          <div className="text-center">
+          <div className="boot-animation text-center">
             <pre className="text-green-500 text-xs md:text-sm mb-6 overflow-x-auto">
               {ASCII_ART}
             </pre>
             <div className="text-lg md:text-xl mb-4">
-              Welcome to <span className="text-yellow-500">{PROFILE.firstName}'s</span>{" "}
+              Welcome to{" "}
+              <span className="text-yellow-500">{PROFILE.firstName}'s</span>{" "}
               Portfolio Terminal
             </div>
             <div className="text-sm md:text-base mb-6 text-gray-400">
-              <div>{PROFILE.role} • {PROFILE.location}</div>
-              <div>{PROFILE.tagline}</div>
+              <div>
+                {PROFILE.role} • {PROFILE.location} • {PROFILE.tagline}
+              </div>
+              <div>{PROFILE.goal}</div>
             </div>
             <div className="text-sm text-blue-400">
               Type <span className="text-yellow-500">'help'</span> to get

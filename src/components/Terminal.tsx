@@ -9,16 +9,59 @@ interface HistoryEntry {
   timestamp: Date;
 }
 
+const ASCII_ART = `
+██╗   ██╗ █████╗ ███████╗██╗  ██╗
+╚██╗ ██╔╝██╔══██╗██╔════╝██║  ██║
+ ╚████╔╝ ███████║███████╗███████║
+  ╚██╔╝  ██╔══██║╚════██║██╔══██║
+   ██║   ██║  ██║███████║██║  ██║
+   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+`;
+
 const COMMANDS: Record<string, () => React.ReactNode> = {
-  help: () => (
-    <div className="space-y-1">
-      <p className="text-yellow-500">Available commands:</p>
-      <p>about - Learn more about me</p>
-      <p>skills - My technical skills</p>
-      <p>projects - Things I've built</p>
-      <p>experience - Work history</p>
-      <p>contact - Get in touch</p>
-      <p>clear - Clear the terminal</p>
+  help: () => {
+    const commandList = [
+      ["about", "Learn more about me"],
+      ["skills", "Technical skills"],
+      ["projects", "Things I've built"],
+      ["experience", "Work history"],
+      ["contact", "Get in touch"],
+      ["resume", "Download resume"],
+      ["theme", "Switch light/dark"],
+      ["ls", "List all commands"],
+      ["whoami", "Who's using this"],
+      ["pwd", "Current directory"],
+      ["date", "Current date/time"],
+      ["neofetch", "System info"],
+      ["fortune", "A random quote"],
+      ["clear", "Clear the screen"],
+    ];
+    return (
+      <div>
+        <p className="text-yellow-500 mb-2">Available commands:</p>
+        <div className="space-y-0.5">
+          {commandList.map(([cmd, desc]) => (
+            <div key={cmd} className="flex">
+              <span className="text-blue-400 w-28 shrink-0">{cmd}</span>
+              <span className="text-gray-400">— {desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  },
+  banner: () => (
+    <div>
+      <pre className="text-green-500 text-xs md:text-sm mb-4 overflow-x-auto">
+        {ASCII_ART}
+      </pre>
+      <div className="text-gray-400">
+        <div>
+          {PROFILE.role} • {PROFILE.location} • {PROFILE.tagline}
+        </div>
+        <div>{PROFILE.goal}</div>
+        <div className="mt-2 text-blue-400">Type 'help' to get started</div>
+      </div>
     </div>
   ),
 
@@ -172,6 +215,62 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       </div>
     );
   },
+  ls: () => (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ml-2">
+      {Object.keys(COMMANDS).map((cmd) => (
+        <span key={cmd} className="text-yellow-500">
+          • {cmd}
+        </span>
+      ))}
+    </div>
+  ),
+
+  pwd: () => (
+    <p className="text-blue-400">/home/{PROFILE.username}/portfolio</p>
+  ),
+
+  date: () => <p className="text-blue-400">{new Date().toLocaleString()}</p>,
+
+  whoami: () => <p className="text-green-500">{PROFILE.username}</p>,
+
+  fortune: () => {
+    const quotes = [
+      "The best code is no code at all.",
+      "Premature optimization is the root of all evil.",
+      "First, solve the problem. Then, write the code.",
+      "Code is like humor. When you have to explain it, it's bad.",
+      "It's not a bug – it's an undocumented feature.",
+    ];
+    return (
+      <div>
+        <p className="text-yellow-500">🔮 Your fortune:</p>
+        <p className="text-blue-400 italic">
+          {quotes[Math.floor(Math.random() * quotes.length)]}
+        </p>
+      </div>
+    );
+  },
+
+  neofetch: () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <p className="text-yellow-500">OS:</p>
+        <p className="text-blue-400">Portfolio OS 1.0</p>
+        <p className="text-yellow-500">Shell:</p>
+        <p className="text-blue-400">react-terminal v1.0</p>
+        <p className="text-yellow-500">Role:</p>
+        <p className="text-blue-400">{PROFILE.role}</p>
+      </div>
+      <div>
+        <p className="text-yellow-500">Stack:</p>
+        <p className="text-blue-400">React, Node.js, MongoDB</p>
+        <p className="text-yellow-500">Location:</p>
+        <p className="text-blue-400">{PROFILE.location}</p>
+        <p className="text-yellow-500">Editor:</p>
+        <p className="text-blue-400">VS Code</p>
+      </div>
+    </div>
+  ),
 };
 
 export const Terminal = () => {
@@ -254,6 +353,14 @@ export const Terminal = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (isBooted && history.length === 0) {
+      setHistory([
+        { command: "", output: COMMANDS.banner(), timestamp: new Date() },
+      ]);
+    }
+  }, [isBooted, history.length]);
 
   if (!isBooted) {
     return <BootSequence onBootComplete={() => setIsBooted(true)} />;
