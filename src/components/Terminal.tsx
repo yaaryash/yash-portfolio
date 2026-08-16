@@ -50,6 +50,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       </div>
     );
   },
+
   banner: () => (
     <div>
       <pre className="text-green-500 text-xs md:text-sm mb-4 overflow-x-auto">
@@ -76,95 +77,218 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
   ),
 
   contact: () => (
-    <div className="space-y-1">
-      <p>
-        GitHub:{" "}
-        <a
-          href={PROFILE.github}
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-400 underline"
-        >
-          {PROFILE.github}
-        </a>
+    <div>
+      <p className="text-green-500 mb-3">
+        Let's connect! Here's where you can find me:
       </p>
-      <p>
-        LinkedIn:{" "}
-        <a
-          href={PROFILE.linkedin}
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-400 underline"
-        >
-          {PROFILE.linkedin}
-        </a>
-      </p>
-      <p>
-        Email:{" "}
-        <a href={`mailto:${PROFILE.email}`} className="text-blue-400 underline">
-          {PROFILE.email}
-        </a>
-      </p>
-    </div>
-  ),
-  skills: () => (
-    <div className="space-y-1">
-      <p className="text-yellow-500">Technical Skills:</p>
-      <p>
-        <span className="text-blue-400">Languages:</span> Python, JavaScript
-        (ES6+), HTML5, CSS3
-      </p>
-      <p>
-        <span className="text-blue-400">Frontend:</span> React.js, Next.js,
-        Tailwind CSS, Material UI, Bootstrap
-      </p>
-      <p>
-        <span className="text-blue-400">Backend:</span> Node.js, Express.js,
-        Flask, REST APIs, JWT
-      </p>
-      <p>
-        <span className="text-blue-400">Databases:</span> MongoDB, MySQL
-      </p>
-      <p>
-        <span className="text-blue-400">AI/ML:</span> Pandas, NumPy,
-        Scikit-learn, PyTorch
-      </p>
-      <p>
-        <span className="text-blue-400">Cloud/DevOps:</span> AWS (EC2, S3),
-        Docker, Nginx, PM2, GitHub Actions
+
+      <div className="space-y-2 ml-4">
+        <div>
+          <span className="text-yellow-500">GitHub:</span>
+          <a
+            href={PROFILE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-blue-400 hover:underline"
+          >
+            github.com/{PROFILE.username}
+          </a>
+        </div>
+
+        <div>
+          <span className="text-yellow-500">LinkedIn:</span>
+          <a
+            href={PROFILE.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 text-blue-400 hover:underline"
+          >
+            linkedin.com/in/{PROFILE.username}
+          </a>
+        </div>
+
+        <div>
+          <span className="text-yellow-500">Email:</span>
+          <a
+            href={`mailto:${PROFILE.email}`}
+            className="ml-2 text-blue-400 hover:underline"
+          >
+            {PROFILE.email}
+          </a>
+        </div>
+
+        <div>
+          <span className="text-yellow-500">Location:</span>
+          <span className="ml-2 text-cyan-400">{PROFILE.location}</span>
+        </div>
+      </div>
+
+      <p className="mt-4 text-gray-500">
+        Feel free to reach out for collaborations, frontend/backend
+        opportunities, or just to say hi!
       </p>
     </div>
   ),
 
-  projects: () => (
-    <div className="space-y-3">
-      <p className="text-yellow-500">Projects:</p>
-      <div>
-        <p className="text-green-400">DevTinder</p>
-        <p className="text-gray-400 text-sm">
-          Full-stack developer networking platform with swipe-based matching.
-          MERN, AWS EC2, Nginx, PM2, Redux Toolkit.
+  skills: () => {
+    const categories = [
+      {
+        title: "Languages",
+        color: "text-yellow-500",
+        items: ["Python", "JavaScript (ES6+)", "HTML5", "CSS3"],
+      },
+      {
+        title: "Frontend",
+        color: "text-cyan-400",
+        items: [
+          "React.js",
+          "Next.js",
+          "Tailwind CSS",
+          "Material UI",
+          "Bootstrap",
+        ],
+      },
+      {
+        title: "Backend",
+        color: "text-blue-400",
+        items: ["Node.js", "Express.js", "Flask", "REST APIs", "JWT"],
+      },
+      {
+        title: "Databases",
+        color: "text-purple-400",
+        items: ["MongoDB", "MySQL"],
+      },
+      {
+        title: "AI/ML",
+        color: "text-pink-400",
+        items: ["Pandas", "NumPy", "Scikit-learn", "PyTorch"],
+      },
+      {
+        title: "Cloud & DevOps",
+        color: "text-orange-400",
+        items: ["AWS (EC2, S3)", "Docker", "Nginx", "PM2", "GitHub Actions"],
+      },
+    ];
+
+    return (
+      <div className="space-y-4">
+        {categories.map((cat) => (
+          <div key={cat.title}>
+            <h3 className="text-green-500 font-bold mb-2">{cat.title}:</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ml-4">
+              {cat.items.map((item) => (
+                <span key={item} className={cat.color}>
+                  • {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  },
+
+  projects: () => {
+    const completed = [
+      {
+        name: "DevTinder",
+        tech: "MERN, AWS EC2, Nginx, PM2, Redux Toolkit",
+        desc: "Full-stack developer networking platform with swipe-based matching.",
+        liveUrl: "http://51.20.192.28/",
+        url: "https://github.com/yaaryash/DevTinder-BE",
+      },
+      {
+        name: "QKart",
+        tech: "React, Node.js, Express.js, MongoDB",
+        desc: "Full-stack e-commerce app with JWT auth and REST APIs.",
+        liveUrl: "https://qkart-frontend-yaaryash.vercel.app/",
+        url: "https://github.com/yaaryash/Qkart-Backend",
+      },
+      {
+        name: "Multilingual AI Voice Assistant",
+        tech: "Python, Streamlit, Gemini API, SpeechRecognition",
+        desc: "Voice/text AI assistant with speech-to-text and text-to-speech.",
+        // liveUrl:
+        // "https://github.com/yaaryash/Personal-AI-Voice-Assistant-System",
+        url: "https://github.com/yaaryash/Personal-AI-Voice-Assistant-System",
+      },
+    ];
+
+    const inProgress = [
+      {
+        name: "🛡️ Cyber Threat Detection Platform",
+        tech: "Scikit-learn, XGBoost, MLflow, FastAPI, Docker, AWS (S3, ECR, EC2), GitHub Actions",
+        desc: "End-to-end MLOps pipeline that detects phishing websites from URL/SSL/domain features. Full pipeline: ingestion → validation → transformation → model comparison → FastAPI serving → CI/CD to AWS.",
+        url: "https://github.com/yaaryash/Cyber-Threat-Detection-Platform",
+      },
+      {
+        name: "This Portfolio",
+        tech: "React, TypeScript, Tailwind CSS",
+        desc: "The terminal you're using right now.",
+        url: "https://github.com/yaaryash/yash-portfolio",
+      },
+    ];
+
+    return (
+      <div className="space-y-6">
+        <div>
+          <p className="text-yellow-500 mb-3">Completed Projects:</p>
+          <div className="space-y-4">
+            {completed.map((p) => (
+              <div key={p.name} className="border-l-2 border-green-500 pl-3">
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-300 font-bold hover:underline"
+                >
+                  {p.name} ↗
+                </a>
+                <div className="flex gap-3 text-xs">
+                  {p.liveUrl && (
+                    <a
+                      href={p.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cyan-400 hover:underline"
+                    >
+                      🔗 Live Demo
+                    </a>
+                  )}
+                </div>
+                <p className="text-purple-400 text-xs mb-1">{p.tech}</p>
+                <p className="text-gray-400 text-sm">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-yellow-500 mb-3">🚧 In Progress:</p>
+          <div className="space-y-4">
+            {inProgress.map((p) => (
+              <div key={p.name} className="border-l-2 border-orange-400 pl-3">
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-300 font-bold hover:underline"
+                >
+                  {p.name} ↗
+                </a>
+                <p className="text-purple-400 text-xs mb-1">{p.tech}</p>
+                <p className="text-gray-400 text-sm">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="text-blue-400 text-sm">
+          Click any project name to view it on GitHub.
         </p>
       </div>
-      <div>
-        <p className="text-green-400">QKart</p>
-        <p className="text-gray-400 text-sm">
-          Full-stack e-commerce app with JWT auth and REST APIs. React, Node.js,
-          Express.js, MongoDB.
-        </p>
-      </div>
-      <div>
-        <p className="text-green-400">Multilingual AI Voice Assistant</p>
-        <p className="text-gray-400 text-sm">
-          Voice/text AI assistant using Gemini API. Python, Streamlit,
-          SpeechRecognition.
-        </p>
-      </div>
-      <p className="text-gray-400 text-sm">
-        Type 'contact' to find these on GitHub.
-      </p>
-    </div>
-  ),
+    );
+  },
 
   experience: () => (
     <div className="space-y-1">
@@ -215,6 +339,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       </div>
     );
   },
+
   ls: () => (
     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 ml-2">
       {Object.keys(COMMANDS).map((cmd) => (
@@ -278,11 +403,13 @@ export const Terminal = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [currentCommand, setCurrentCommand] = useState("");
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const commandNames = Object.keys(COMMANDS);
 
-  // Restore saved theme on load
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "light") {
@@ -290,20 +417,30 @@ export const Terminal = () => {
     }
   }, []);
 
-  // Auto-scroll to bottom whenever history changes
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [history]);
 
-  const executeCommand = useCallback((cmd: string) => {
+  useEffect(() => {
+    if (isBooted && history.length === 0) {
+      setHistory([
+        { command: "", output: COMMANDS.banner(), timestamp: new Date() },
+      ]);
+    }
+  }, [isBooted, history.length]);
+
+  const executeCommand = useCallback(async (cmd: string) => {
     const trimmedCmd = cmd.trim().toLowerCase();
 
     if (trimmedCmd === "clear") {
       setHistory([]);
       return;
     }
+
+    setIsLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 400));
 
     let output: React.ReactNode;
     if (trimmedCmd === "") {
@@ -322,13 +459,29 @@ export const Terminal = () => {
       ...prev,
       { command: cmd, output, timestamp: new Date() },
     ]);
+    setIsLoading(false);
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setCurrentCommand(value);
+
+    if (value) {
+      const matches = commandNames.filter((cmd) =>
+        cmd.startsWith(value.toLowerCase()),
+      );
+      setSuggestions(matches);
+    } else {
+      setSuggestions([]);
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       executeCommand(currentCommand);
       setCurrentCommand("");
       setHistoryIndex(-1);
+      setSuggestions([]);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       const cmds = history.map((h) => h.command).filter(Boolean);
@@ -351,16 +504,14 @@ export const Terminal = () => {
           setCurrentCommand(cmds[newIndex]);
         }
       }
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      if (suggestions.length === 1) {
+        setCurrentCommand(suggestions[0]);
+        setSuggestions([]);
+      }
     }
   };
-
-  useEffect(() => {
-    if (isBooted && history.length === 0) {
-      setHistory([
-        { command: "", output: COMMANDS.banner(), timestamp: new Date() },
-      ]);
-    }
-  }, [isBooted, history.length]);
 
   if (!isBooted) {
     return <BootSequence onBootComplete={() => setIsBooted(true)} />;
@@ -375,18 +526,28 @@ export const Terminal = () => {
       {history.map((entry, i) => (
         <TerminalOutput key={i} command={entry.command} output={entry.output} />
       ))}
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center">
         <span className="text-green-500">{PROFILE.username}@portfolio:~$</span>
-        <input
-          ref={inputRef}
-          value={currentCommand}
-          onChange={(e) => setCurrentCommand(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="bg-transparent outline-none flex-1 text-foreground"
-          autoFocus
-          spellCheck={false}
-        />
+        {isLoading ? (
+          <div className="terminal-loading"></div>
+        ) : (
+          <input
+            ref={inputRef}
+            value={currentCommand}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            className="bg-transparent outline-none flex-1 text-foreground ml-2"
+            autoFocus
+            spellCheck={false}
+          />
+        )}
       </div>
+
+      {suggestions.length > 0 && (
+        <div className="text-sm text-gray-500 mt-1">
+          Suggestions: {suggestions.join(", ")}
+        </div>
+      )}
     </div>
   );
 };

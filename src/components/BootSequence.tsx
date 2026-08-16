@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PROFILE } from "@/lib/profile";
-
+import { MatrixRain } from "./MatrixRain";
 interface BootSequenceProps {
   onBootComplete: () => void;
 }
@@ -50,6 +50,7 @@ export const BootSequence = ({ onBootComplete }: BootSequenceProps) => {
 
   return (
     <div className="h-screen bg-background text-foreground font-mono flex flex-col justify-center items-center p-4">
+      <MatrixRain opacity={0.2} />
       <div className="max-w-4xl w-full">
         {!showWelcome ? (
           <div className="space-y-2">
