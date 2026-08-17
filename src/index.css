@@ -96,31 +96,56 @@
     animation: spin 0.8s linear infinite;
     margin-left: 8px;
   }
-  @keyframes carDrive {
+
+  @keyframes welcomeType {
     0% {
-      left: -10%;
+      clip-path: inset(0 100% 0 0);
     }
     100% {
-      left: 105%;
+      clip-path: inset(0 0 0 0);
     }
   }
+  .welcome-type {
+    animation: welcomeType 2.5s steps(40) forwards;
+  }
 
-  .car-drive {
-    animation: carDrive 2s linear forwards;
+  @keyframes carTrack {
+    0% {
+      left: 0%;
+      opacity: 1;
+    }
+    80% {
+      left: 95%;
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  .car-track {
+    left: 0%;
+    animation: carTrack 2.5s linear forwards;
   }
 
   @keyframes smokeFade {
     0% {
-      opacity: 0.6;
-      transform: scale(0.6) translateY(0);
+      opacity: 0.7;
+      transform: scale(0.6) translate(0, 0);
     }
     100% {
       opacity: 0;
-      transform: scale(1.4) translateY(-10px);
+      transform: scale(1.6) translate(-6px, -10px);
     }
   }
-
   .smoke-puff {
-    animation: smokeFade 0.8s ease-out forwards;
+    animation: smokeFade 700ms ease-out forwards;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

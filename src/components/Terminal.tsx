@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { BootSequence } from "./BootSequence";
 import { PROFILE } from "@/lib/profile";
 import { TerminalOutput } from "./TerminalOutput";
+import { CarLoop } from "./CarIntro";
+import { MusicPlayer } from "./MusicPlayer";
 
 interface HistoryEntry {
   command: string;
@@ -26,6 +28,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       ["projects", "Things I've built"],
       ["experience", "Work history"],
       ["contact", "Get in touch"],
+      ["music", "Take a listening break"],
       ["resume", "Download resume"],
       ["theme", "Switch light/dark"],
       ["ls", "List all commands"],
@@ -53,16 +56,30 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
 
   banner: () => (
     <div>
-      <pre className="text-green-500 text-xs md:text-sm mb-4 overflow-x-auto">
+      <pre className="text-green-500 text-xs md:text-sm mb-2 overflow-x-auto">
         {ASCII_ART}
       </pre>
+      <CarLoop />
       <div className="text-gray-400">
         <div>
           {PROFILE.role} • {PROFILE.location} • {PROFILE.tagline}
         </div>
         <div>{PROFILE.goal}</div>
         <div className="mt-2 text-blue-400">Type 'help' to get started</div>
+        <div className="mt-1 text-gray-500 text-sm">
+          🎧 Tip: type 'music' if you want something to listen to while you look
+          around.
+        </div>
       </div>
+    </div>
+  ),
+  music: () => (
+    <div>
+      <p className="text-green-500 mb-3">
+        Reading resumes all day? Take a break — vibe with this while you check
+        out my work 🎧
+      </p>
+      <MusicPlayer />
     </div>
   ),
 
