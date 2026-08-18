@@ -84,12 +84,46 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
   ),
 
   about: () => (
-    <div className="space-y-1">
+    <div className="space-y-3">
+      <p>Hey there.</p>
       <p>
-        {PROFILE.name} — {PROFILE.role}
+        I'm <span className="text-green-400 font-bold">{PROFILE.name}</span>, a{" "}
+        {PROFILE.role} from {PROFILE.location}.
       </p>
-      <p className="text-gray-400">{PROFILE.tagline}</p>
-      <p className="text-gray-400">{PROFILE.education}</p>
+
+      <div>
+        <p className="mb-1">Right now, I'm focused on:</p>
+        <div className="ml-2 space-y-1">
+          <p>
+            <span className="text-pink-400">AI/ML & Deep Learning</span> —
+            currently learning and building real projects in this space
+          </p>
+          <p>
+            <span className="text-cyan-400">Backend Development</span> — diving
+            deep into building scalable, well-architected systems
+          </p>
+          <p>
+            <span className="text-blue-400">Frontend Development</span> —
+            shipping fast, production-ready React apps
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Next, I want to go deeper into backend engineering and scalable systems
+        — that's where most of my current energy is going.
+      </p>
+
+      <p>
+        Outside of code, I play cricket, game with friends, and I'm always up
+        for meeting new people — making friends comes naturally to me, and I
+        like keeping that side of life just as active as the technical side.
+      </p>
+
+      <p className="text-gray-500 text-sm">
+        Type 'skills', 'projects', or 'experience' to see what I've actually
+        built.
+      </p>
     </div>
   ),
 
@@ -157,18 +191,12 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       {
         title: "Frontend",
         color: "text-cyan-400",
-        items: [
-          "React.js",
-          "Next.js",
-          "Tailwind CSS",
-          "Material UI",
-          "Bootstrap",
-        ],
+        items: ["React.js", "Tailwind CSS", "Material UI", "Bootstrap"],
       },
       {
         title: "Backend",
         color: "text-blue-400",
-        items: ["Node.js", "Express.js", "Flask", "REST APIs", "JWT"],
+        items: ["Node.js", "Express.js", "REST APIs", "JWT"],
       },
       {
         title: "Databases",
@@ -183,7 +211,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
       {
         title: "Cloud & DevOps",
         color: "text-orange-400",
-        items: ["AWS (EC2, S3)", "Docker", "Nginx", "PM2", "GitHub Actions"],
+        items: ["AWS (EC2, S3)", "Docker", "Nginx", "PM2", "Git"],
       },
     ];
 
@@ -308,21 +336,125 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
   },
 
   experience: () => (
-    <div className="space-y-1">
-      <p className="text-yellow-500">Work Experience:</p>
-      <p className="text-green-400">
-        Frontend Developer Consultant — Solytics Partners
-      </p>
-      <p className="text-gray-400 text-sm">Aug 2024 – Aug 2025</p>
-      <p className="text-sm">
-        • Modernized a large-scale React app for React 19 migration
-      </p>
-      <p className="text-sm">
-        • Maintained internal forks of third-party libraries for compatibility
-      </p>
-      <p className="text-sm">
-        • Led daily Scrum updates and Jira-based task coordination
-      </p>
+    <div className="space-y-4">
+      <div className="flex flex-wrap justify-between gap-2">
+        <p className="text-green-400 font-bold">
+          Frontend Developer Consultant
+        </p>
+        <p className="text-gray-300">Solytics Partners</p>
+        <p className="text-gray-500 text-sm">Aug 2024 – Aug 2025</p>
+      </div>
+
+      <div>
+        <p className="text-cyan-400 text-sm font-bold mb-1">
+          Engineering Contributions
+        </p>
+        <div className="ml-2 space-y-1 text-sm text-gray-300">
+          <p>
+            • Modernized a large-scale React application for React 19 by
+            implementing code changes, resolving breaking changes, fixing
+            migration-related bugs, and validating compatibility across multiple
+            application environments.
+          </p>
+          <p>
+            • Updated and maintained internal forks of third-party libraries for
+            React 19 compatibility, publishing packages through GitHub Actions
+            until official support became available and collaborating with
+            library maintainers to resolve compatibility issues.
+          </p>
+          <p>
+            • Developed and delivered frontend features, bug fixes, and
+            technical documentation in an Agile development environment.
+          </p>
+          <p>
+            • Debugged and resolved frontend bugs, improving application
+            stability and user experience.
+          </p>
+          <p>
+            • Refactored reusable React components, improved code quality,
+            participated in code reviews, and collaborated with cross-functional
+            teams to deliver production-ready features.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-purple-400 text-sm font-bold mb-1">
+          Technical Leadership
+        </p>
+        <div className="ml-2 space-y-1 text-sm text-gray-300">
+          <p>
+            • Contributed to the React 19 migration by assisting with planning,
+            implementation across multiple environments, tracking progress,
+            resolving blockers, and supporting timely delivery.
+          </p>
+          <p>
+            • Presented daily progress updates, risks, and blockers during Scrum
+            meetings, helping maintain alignment across engineering teams and
+            stakeholders.
+          </p>
+          <p>
+            • Assisted developers with Git, GitHub workflows, repository
+            management, branching strategies, and local development environment
+            setup.
+          </p>
+          <p>
+            • Created and managed Jira stories, coordinated task execution, and
+            communicated project status and delivery updates throughout the
+            development lifecycle.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-yellow-500 text-sm font-bold mb-1">Technologies</p>
+        <div className="flex flex-wrap gap-2">
+          {[
+            "React",
+            "JavaScript",
+            "Redux",
+            "Git",
+            "GitHub Actions",
+            "Material UI",
+            "Elastic",
+            "Jenkins",
+            "Jira",
+            "Postman",
+          ].map((tech) => (
+            <span
+              key={tech}
+              className="text-xs px-2 py-0.5 rounded-full border border-gray-700 text-blue-400"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="text-orange-400 text-sm font-bold mb-1">
+          🏆 Awards & Achievements
+        </p>
+        <div className="ml-2 space-y-1 text-sm text-gray-300">
+          <p>
+            •{" "}
+            <span className="text-white">
+              Open-Source Contributor — React-Mathquill:
+            </span>{" "}
+            Led the team's first contribution by upgrading the library to
+            support React 19; successfully merged into the official repository,
+            ensuring compatibility for global users.
+          </p>
+          <p>
+            •{" "}
+            <span className="text-white">
+              Spotlight Award — Solytics Partners:
+            </span>{" "}
+            Recognized as part of the winning team for outstanding performance
+            and contribution to organizational success.
+          </p>
+        </div>
+      </div>
     </div>
   ),
 
@@ -373,7 +505,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
 
   date: () => <p className="text-blue-400">{new Date().toLocaleString()}</p>,
 
-  whoami: () => <p className="text-green-500">{PROFILE.username}</p>,
+  whoami: () => <p className="text-green-500">Yash Walke</p>,
 
   fortune: () => {
     const quotes = [
